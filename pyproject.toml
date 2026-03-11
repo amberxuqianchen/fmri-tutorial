@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fmri-tutorial-utils"
+version = "0.1.0"
+description = "Utility library for the fMRI Analysis Tutorials for Social Neuroscience"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Amber Chen", email = "amberxuqianchen@users.noreply.github.com" },
+]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.21",
+    "pandas>=1.3",
+    "matplotlib>=3.5",
+    "nibabel>=3.2",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+
+[project.optional-dependencies]
+bids = ["pybids>=0.15"]
+nipype = ["nipype>=1.8"]
+nilearn = ["nilearn>=0.9"]
+dicom = ["pydicom>=2.3"]
+all = [
+    "pybids>=0.15",
+    "nipype>=1.8",
+    "nilearn>=0.9",
+    "pydicom>=2.3",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "nbval>=0.10",
+    "jupyterlab>=3.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/amberxuqianchen/fmri-tutorial"
+Documentation = "https://github.com/amberxuqianchen/fmri-tutorial/tree/main/docs"
+Repository = "https://github.com/amberxuqianchen/fmri-tutorial"
+Issues = "https://github.com/amberxuqianchen/fmri-tutorial/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["utils*"]
+
+[tool.black]
+line-length = 99
+target-version = ["py39", "py310", "py311", "py312"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"

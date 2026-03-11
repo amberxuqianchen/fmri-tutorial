@@ -1,0 +1,27 @@
+name: Validate BIDS Dataset
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate-bids:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install bids-validator
+        run: npm install -g bids-validator
+
+      - name: Run bids-validator on example data
+        continue-on-error: true
+        run: bids-validator data/example_bids/

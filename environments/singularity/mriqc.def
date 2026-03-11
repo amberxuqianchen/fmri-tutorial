@@ -1,0 +1,24 @@
+Bootstrap: docker
+From: nipreps/mriqc:latest
+
+%labels
+    Maintainer fmri-tutorial contributors
+    Version latest
+    Description MRIQC – MRI quality control tool (nipreps/mriqc)
+
+%help
+    MRIQC extracts image quality metrics from structural and functional MRI.
+    See https://mriqc.readthedocs.io for full documentation.
+
+    Basic usage example:
+        singularity run mriqc.sif \
+            /path/to/bids /path/to/output participant \
+            --participant-label sub-01 \
+            --work-dir /path/to/work
+
+%environment
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+
+%runscript
+    exec mriqc "$@"

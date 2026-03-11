@@ -1,0 +1,14 @@
+name: fmri-tutorial-minimal
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - jupyter
+  - jupyterlab
+  - numpy
+  - pandas
+  - matplotlib
+  - conda-forge::nibabel
+  - conda-forge::pybids
+  - conda-forge::heudiconv

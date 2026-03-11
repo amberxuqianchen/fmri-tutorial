@@ -1,0 +1,24 @@
+{
+  "participant_id": {
+    "Description": "Unique participant identifier, formatted as sub-<label> per BIDS convention."
+  },
+  "age": {
+    "Description": "Participant age at time of scanning.",
+    "Units": "years"
+  },
+  "sex": {
+    "Description": "Biological sex of the participant.",
+    "Levels": {
+      "F": "Female",
+      "M": "Male",
+      "O": "Other / not reported"
+    }
+  },
+  "group": {
+    "Description": "Experimental group assignment.",
+    "Levels": {
+      "control": "Healthy control participant",
+      "patient": "Clinical patient participant"
+    }
+  }
+}

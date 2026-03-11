@@ -1,0 +1,18 @@
+{
+  "TaskName": "Emotion Regulation",
+  "TaskDescription": "Participants view negative emotional images and are instructed to Reappraise (cognitively reframe the emotional content), Suppress (inhibit outward emotional expression), or simply Look at the images without any regulation strategy.",
+  "CogAtlasID": "https://www.cognitiveatlas.org/task/id/tsk_4a57abb949b81",
+  "RepetitionTime": 2.0,
+  "EchoTime": 0.03,
+  "FlipAngle": 90,
+  "SliceTiming": [
+    0.0, 0.0633, 0.1267, 0.19, 0.2533, 0.3167, 0.38, 0.4433,
+    0.5067, 0.57, 0.6333, 0.6967, 0.76, 0.8233, 0.8867, 0.95,
+    1.0133, 1.0767, 1.14, 1.2033, 1.2667, 1.33, 1.3933, 1.4567,
+    1.52, 1.5833, 1.6467, 1.71, 1.7733, 1.8367
+  ],
+  "PhaseEncodingDirection": "j",
+  "EffectiveEchoSpacing": 0.0005,
+  "TotalReadoutTime": 0.05,
+  "RunIndex": 1
+}
