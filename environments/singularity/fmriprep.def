@@ -1,0 +1,24 @@
+Bootstrap: docker
+From: nipreps/fmriprep:latest
+
+%labels
+    Maintainer fmri-tutorial contributors
+    Version latest
+    Description fMRIPrep – fMRI preprocessing pipeline (nipreps/fmriprep)
+
+%help
+    fMRIPrep is a robust fMRI preprocessing pipeline.
+    See https://fmriprep.org for full documentation.
+
+    Basic usage example:
+        singularity run fmriprep.sif \
+            /path/to/bids /path/to/output participant \
+            --participant-label sub-01 \
+            --fs-license-file /path/to/license.txt
+
+%environment
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+
+%runscript
+    exec /neurodocker/startup.sh fmriprep "$@"

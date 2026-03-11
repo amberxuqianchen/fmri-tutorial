@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+
+  # ── JupyterLab (full fmri-tutorial environment) ───────────────────────────
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fmri-tutorial:latest
+    container_name: fmri-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ..:/home/fmriuser/tutorials
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    restart: unless-stopped
+
+  # ── MRIQC ─────────────────────────────────────────────────────────────────
+  mriqc:
+    image: nipreps/mriqc:latest
+    container_name: fmri-mriqc
+    volumes:
+      - ../data/bids:/data:ro
+      - ../data/mriqc_output:/out
+      - ../data/mriqc_work:/work
+    command: /data /out participant --work-dir /work
+    user: "${UID:-1000}:${GID:-1000}"
+
+  # ── fMRIPrep ──────────────────────────────────────────────────────────────
+  fmriprep:
+    image: nipreps/fmriprep:latest
+    container_name: fmri-fmriprep
+    volumes:
+      - ../data/bids:/data:ro
+      - ../data/fmriprep_output:/out
+      - ../data/fmriprep_work:/work
+      - ../data/freesurfer_license:/opt/freesurfer/license.txt:ro
+    command: /data /out participant --work-dir /work
+    user: "${UID:-1000}:${GID:-1000}"

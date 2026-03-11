@@ -1,0 +1,26 @@
+name: fmri-tutorial-full
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - jupyter
+  - jupyterlab
+  - notebook
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - seaborn
+  - statsmodels
+  - scikit-learn
+  - pytest
+  - pytest-cov
+  - black
+  - flake8
+  - conda-forge::nibabel
+  - conda-forge::nilearn
+  - conda-forge::pybids
+  - conda-forge::heudiconv
+  - conda-forge::mriqc
+  - conda-forge::nipype
