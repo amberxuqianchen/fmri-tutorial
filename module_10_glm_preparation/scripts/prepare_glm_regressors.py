@@ -257,7 +257,7 @@ def main():
         import numpy as np
         from nilearn.glm.first_level import make_first_level_design_matrix
     except ImportError as exc:
-        print(f"ERROR: nilearn and numpy are required. Install with: pip install nilearn numpy")
+        print(f"ERROR: nilearn, numpy, and pandas are required. Install with: pip install nilearn numpy pandas")
         print(f"  Detail: {exc}")
         sys.exit(1)
 

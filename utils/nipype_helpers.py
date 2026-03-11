@@ -56,7 +56,7 @@ def create_minimal_preproc_workflow(name="minimal_preproc"):
     )
     inputnode.inputs.fwhm = 6.0  # default smoothing kernel (mm)
 
-    # --- Skull stripping (mean volume first, then BET) ---
+    # --- Skull stripping (compute mean volume, then apply BET to extract brain mask) ---
     meanvol = pe.Node(fsl.MeanImage(dimension="T"), name="meanvol")
     bet = pe.Node(fsl.BET(mask=True, functional=True), name="bet")
 

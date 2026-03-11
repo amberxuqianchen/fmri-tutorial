@@ -305,7 +305,7 @@ def main():
         from nilearn.glm.first_level import FirstLevelModel
         from nilearn import image as nib_image
     except ImportError as exc:
-        print(f"ERROR: nilearn and nibabel are required. Install with: pip install nilearn nibabel")
+        print(f"ERROR: nilearn, nibabel, and numpy are required. Install with: pip install nilearn nibabel numpy")
         print(f"  Detail: {exc}")
         sys.exit(1)
 

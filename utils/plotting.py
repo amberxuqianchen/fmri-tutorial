@@ -66,7 +66,7 @@ def plot_bold_timeseries(nii_path, mask_path=None, n_voxels=100, save_path=None)
         data[x, y, z, :] for x, y, z in selected_coords
     ])
 
-    # Percent-signal-change normalisation
+    # Percent-signal-change normalization
     means = timeseries.mean(axis=1, keepdims=True)
     means[means == 0] = 1
     timeseries_psc = (timeseries / means - 1) * 100
