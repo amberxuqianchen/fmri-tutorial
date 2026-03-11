@@ -1,0 +1,17 @@
+name: fmri-tutorial-nipype
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - jupyter
+  - jupyterlab
+  - numpy
+  - pandas
+  - matplotlib
+  - conda-forge::nibabel
+  - conda-forge::nipype
+  - conda-forge::nilearn
+# Note: FSL and ANTs must be installed separately and added to PATH.
+# FSL: https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/FslInstallation
+# ANTs: https://github.com/ANTsX/ANTs/releases
