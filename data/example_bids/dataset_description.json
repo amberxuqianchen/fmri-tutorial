@@ -1,0 +1,13 @@
+{
+  "Name": "Emotion Regulation fMRI Tutorial Dataset",
+  "BIDSVersion": "1.8.0",
+  "License": "CC0",
+  "Authors": [
+    "Tutorial Author"
+  ],
+  "HowToAcknowledge": "This is a synthetic tutorial dataset. If you use it in published work, please acknowledge the fMRI Tutorial repository and cite the BIDS specification: Gorgolewski et al. (2016), Scientific Data, https://doi.org/10.1038/sdata.2016.44.",
+  "DatasetType": "raw",
+  "ReferencesAndLinks": [
+    "https://bids-specification.readthedocs.io"
+  ]
+}
