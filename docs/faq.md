@@ -6,8 +6,8 @@
 
 Use the provided conda environment from `environments/`. Run:
 ```bash
-conda env create -f environments/fmri-tutorial.yml
-conda activate fmri-tutorial
+conda env create -f environments/environment_full.yml
+conda activate fmri-tutorial-full
 ```
 This installs all required packages (nibabel, nilearn, nipype, pybids, pandas, matplotlib, etc.) at tested versions. Using a different environment may cause compatibility issues.
 
@@ -32,7 +32,7 @@ No. All tools in this tutorial run on CPU. Some steps (e.g., HD-BET brain extrac
 
 ### Can I use this tutorial with non-emotion regulation tasks?
 
-Yes. The BIDS conversion (Modules 01–03), QC (Modules 05–06), and preprocessing (Module 07) steps are fully task-agnostic. For the GLM modules (08–10), you will need to update the trial types and contrast definitions to match your task design. The `contrast_defs` dictionary in `scripts/run_first_level_glm.py` is the main place to edit.
+Yes. The BIDS conversion (Modules 01–03), QC (Modules 05–06), and preprocessing (Module 07) steps are fully task-agnostic. For the GLM modules (08–10), you will need to update the trial types and contrast definitions to match your task design. The `CONTRASTS` dictionary in `scripts/run_first_level_glm.py` is the main place to edit.
 
 ### How do I handle missing slice timing information?
 
@@ -122,7 +122,7 @@ See `module_09_fmriprep_outputs/scripts/extract_confounds.py` for implementation
 
 ### What HRF model should I use?
 
-For most analyses, use `hrf_model="spm"` (the canonical double-gamma HRF used by SPM). If you have reason to believe HRF shape varies substantially across regions or subjects, consider `"spm + derivative"` which adds the temporal derivative. The default in nilearn's `make_first_level_design_matrix()` is `"glover"`, which is equivalent to the SPM HRF.
+For most analyses, use `hrf_model="spm"` (the canonical HRF commonly used in task fMRI). If you have reason to believe HRF timing varies across regions or subjects, consider `"spm + derivative"` which adds a temporal derivative regressor. Nilearn also supports `"glover"`; it is similar in practice but not identical to SPM's HRF.
 
 ### My design matrix has a rank deficiency warning — what does that mean?
 

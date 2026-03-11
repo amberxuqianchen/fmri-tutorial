@@ -45,11 +45,11 @@ By the end of this module you will be able to:
 
 ### 1. Create the conda environment
 
-An `environment.yml` file is provided in the repository root under `environments/`. To create the environment run:
+Environment files are provided under `environments/`. To create the full tutorial environment run:
 
 ```bash
-conda env create -f environments/environment.yml
-conda activate fmri-tutorial
+conda env create -f environments/environment_full.yml
+conda activate fmri-tutorial-full
 ```
 
 ### 2. Launch JupyterLab

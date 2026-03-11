@@ -192,7 +192,7 @@ log_info "Elapsed time   : ${ELAPSED}s ($(( ELAPSED / 60 ))m $(( ELAPSED % 60 ))
 log_info "Batch log      : ${BATCH_LOG}"
 
 # Count successes / failures from the log
-NSUCCESS=$(grep -c '\[OK\]\|SUCCESS' "$BATCH_LOG" 2>/dev/null || true)
+NSUCCESS=$(grep -c 'SUCCESS' "$BATCH_LOG" 2>/dev/null || true)
 NFAILED=$(grep -c 'FAILED' "$BATCH_LOG" 2>/dev/null || true)
 log_ok  "Succeeded : ${NSUCCESS}"
 [[ "$NFAILED" -gt 0 ]] && log_error "Failed    : ${NFAILED} — check ${BATCH_LOG}"

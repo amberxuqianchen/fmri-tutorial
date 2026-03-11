@@ -40,7 +40,7 @@ Using a containerized version (Docker or Singularity) ensures reproducibility ac
 | File | Description |
 |------|-------------|
 | `07_fmriprep_docker.ipynb` | fMRIPrep with Docker (local workstation) |
-| `07_fmriprep_conda.ipynb` | fMRIPrep with Conda environment |
+| `07_fmriprep_singularity.ipynb` | fMRIPrep with Singularity/Apptainer (HPC) |
 | `scripts/run_fmriprep_docker.sh` | Shell script: single-subject Docker run |
 | `scripts/run_fmriprep_singularity.sh` | Shell script: single-subject Singularity run |
 | `scripts/run_fmriprep_batch.sh` | Shell script: batch multi-subject processing |

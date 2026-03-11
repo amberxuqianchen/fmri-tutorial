@@ -221,7 +221,15 @@ def select_confounds(confounds_df, strategy, fd_threshold):
     full_desired = {
         "minimal":    _MOTION_6 + ["framewise_displacement"],
         "moderate":   _MOTION_6 + ["framewise_displacement"] + _TISSUE + _ACOMPCOR_6,
-        "aggressive": _MOTION_6 + ["framewise_displacement"] + _TISSUE + _ACOMPCOR_6,
+        "aggressive": (
+            _MOTION_6
+            + _MOTION_DERIV
+            + _MOTION_SQ
+            + _MOTION_DERIV_SQ
+            + ["framewise_displacement"]
+            + _TISSUE
+            + _ACOMPCOR_6
+        ),
     }
     missing = [c for c in full_desired.get(strategy, []) if c not in set(available)]
     if missing:
@@ -470,21 +478,26 @@ def main():
     # ------------------------------------------------------------------
     # 6. Define contrasts
     # ------------------------------------------------------------------
-    CONTRASTS = {
-        "Reappraise_vs_Look_Neg": "Reappraise - Look_Neg",
-        "Suppress_vs_Look_Neg":   "Suppress - Look_Neg",
-        "Reappraise_vs_Suppress": "Reappraise - Suppress",
-    }
+    dm_col_set = set(fitted_dm.columns)
+    baseline_cond = (
+        "Look_Neg" if "Look_Neg" in dm_col_set else
+        ("Look" if "Look" in dm_col_set else None)
+    )
 
-    # Verify required conditions are in the design matrix
-    required_conds = {"Reappraise", "Suppress", "Look_Neg"}
-    dm_col_set     = set(fitted_dm.columns)
-    missing_conds  = required_conds - dm_col_set
-    if missing_conds:
+    CONTRASTS = {}
+    if "Reappraise" in dm_col_set and baseline_cond is not None:
+        CONTRASTS[f"Reappraise_vs_{baseline_cond}"] = f"Reappraise - {baseline_cond}"
+    if "Suppress" in dm_col_set and baseline_cond is not None:
+        CONTRASTS[f"Suppress_vs_{baseline_cond}"] = f"Suppress - {baseline_cond}"
+    if {"Reappraise", "Suppress"}.issubset(dm_col_set):
+        CONTRASTS["Reappraise_vs_Suppress"] = "Reappraise - Suppress"
+
+    if not CONTRASTS:
         warnings.warn(
-            f"Conditions not found in design matrix: {missing_conds}. "
-            "Contrasts involving these conditions will fail."
+            "No valid contrasts could be constructed from the design matrix columns. "
+            "Need Reappraise/Suppress and either Look_Neg or Look."
         )
+        sys.exit(1)
 
     # ------------------------------------------------------------------
     # 7. Compute contrasts and save z-maps

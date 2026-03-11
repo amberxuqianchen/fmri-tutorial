@@ -72,8 +72,9 @@ log_ok "Inputs validated."
 # ── Setup ─────────────────────────────────────────────────────────────────────
 mkdir -p "$OUTPUT_DIR"
 
-# DICOM glob template — adjust for your site's DICOM layout if needed
-DCMTEMPLATE="${DCMTEMPLATE:-${DICOM_DIR}/{subject}/*/*.dcm}"
+# DICOM glob template — adjust for your site's DICOM layout if needed.
+# Default assumes DICOM_DIR already points to a single-subject directory.
+DCMTEMPLATE="${DCMTEMPLATE:-${DICOM_DIR}/*/*.dcm}"
 
 LOG_FILE="${OUTPUT_DIR}/logs/heudiconv_${SUBJECT_BARE}_$(date +%Y%m%dT%H%M%S).log"
 mkdir -p "$(dirname "$LOG_FILE")"

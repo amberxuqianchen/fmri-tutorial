@@ -36,10 +36,14 @@ def main():
     bold["bold_exclude"] = False
     bold["bold_reason"] = ""
 
-    if "mean_fd" in bold.columns:
-        mask = bold["mean_fd"] > args.fd_threshold
+    # MRIQC commonly uses "fd_mean"; older tables may use "mean_fd".
+    fd_col = "fd_mean" if "fd_mean" in bold.columns else ("mean_fd" if "mean_fd" in bold.columns else None)
+    if fd_col is not None:
+        mask = bold[fd_col] > args.fd_threshold
         bold.loc[mask, "bold_exclude"] = True
-        bold.loc[mask, "bold_reason"] += f"mean_fd>{args.fd_threshold};"
+        bold.loc[mask, "bold_reason"] += f"{fd_col}>{args.fd_threshold};"
+    else:
+        print("WARNING: No FD mean column found ('fd_mean' or 'mean_fd'); FD threshold will not be applied.")
 
     if "tsnr" in bold.columns:
         mask = bold["tsnr"] < args.tsnr_threshold

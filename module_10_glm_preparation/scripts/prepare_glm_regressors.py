@@ -202,7 +202,15 @@ def select_confounds(confounds_df, strategy):
     full_desired = {
         "minimal":    _MOTION_6 + ["framewise_displacement"],
         "moderate":   _MOTION_6 + ["framewise_displacement"] + _TISSUE + _ACOMPCOR_6,
-        "aggressive": _MOTION_6 + ["framewise_displacement"] + _TISSUE + _ACOMPCOR_6,
+        "aggressive": (
+            _MOTION_6
+            + _MOTION_DERIV
+            + _MOTION_SQ
+            + _MOTION_DERIV_SQ
+            + ["framewise_displacement"]
+            + _TISSUE
+            + _ACOMPCOR_6
+        ),
     }
     missing = [c for c in full_desired.get(strategy, []) if c not in set(available)]
     if missing:

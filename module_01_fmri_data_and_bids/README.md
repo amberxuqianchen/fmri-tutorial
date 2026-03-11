@@ -60,5 +60,5 @@ The notebooks use:
 
 ## Next Steps
 
-After completing this module, continue to **Module 02: fMRI Preprocessing** to learn about
-motion correction, slice-timing correction, and spatial normalisation.
+After completing this module, continue to **Module 02: DICOM-to-BIDS Conversion with HeudiConv**
+to convert scanner DICOMs into a BIDS-compliant dataset.

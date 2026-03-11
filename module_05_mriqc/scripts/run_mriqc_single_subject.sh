@@ -39,6 +39,11 @@
 
 set -euo pipefail
 
+usage() {
+    sed -n '2,/^set -euo pipefail/p' "$0" | sed 's/^# \{0,1\}//' | sed '$d'
+    exit "${1:-0}"
+}
+
 # ---------------------------------------------------------------------------
 # Defaults
 # ---------------------------------------------------------------------------
@@ -60,9 +65,12 @@ while [[ $# -gt 0 ]]; do
             RUN_MODE="singularity"
             shift
             ;;
+        -h|--help)
+            usage 0
+            ;;
         -*)
             echo "Unknown option: $1" >&2
-            exit 1
+            usage 1
             ;;
         *)
             break
@@ -71,8 +79,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ $# -lt 3 ]]; then
-    echo "Usage: $0 [--docker|--singularity] BIDS_DIR OUTPUT_DIR SUBJECT_ID" >&2
-    exit 1
+    usage 1
 fi
 
 BIDS_DIR="$(realpath "$1")"

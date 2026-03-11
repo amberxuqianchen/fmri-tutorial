@@ -23,7 +23,7 @@ import sys
 # the working directory.
 # ---------------------------------------------------------------------------
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, "..", "..", ".."))
+_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, "..", ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
@@ -75,6 +75,7 @@ def analyze_modality(
     output_dir: str,
     modality: str,
     key_metrics: list[str],
+    threshold: float,
 ) -> int:
     """Run the full analysis pipeline for one modality.
 
@@ -83,6 +84,7 @@ def analyze_modality(
         output_dir: Directory where plots and reports are saved.
         modality: Either ``'bold'`` or ``'T1w'``.
         key_metrics: List of preferred metric column names to highlight.
+        threshold: IQR multiplier used for outlier detection.
 
     Returns:
         Number of flagged (outlier) scans.
@@ -108,7 +110,7 @@ def analyze_modality(
         metrics = None  # let flag_outliers and plot choose automatically
 
     # --- Outlier flags -------------------------------------------------------
-    flags = flag_outliers(df, metrics=metrics)
+    flags = flag_outliers(df, metrics=metrics, threshold=threshold)
     n_flagged = int(flags["any_outlier"].sum())
     print(f"Flagged {n_flagged} / {len(df)} scan(s) as potential outliers.")
 
@@ -199,6 +201,7 @@ def main(argv=None) -> int:
     os.makedirs(output_dir, exist_ok=True)
     print(f"MRIQC directory : {mriqc_dir}")
     print(f"Output directory: {output_dir}")
+    print(f"Outlier threshold (IQR multiplier): {args.threshold}")
 
     modalities = (
         ["bold", "T1w"] if args.modality == "both" else [args.modality]
@@ -215,6 +218,7 @@ def main(argv=None) -> int:
             output_dir,
             modality,
             key_metrics_map[modality],
+            args.threshold,
         )
 
     print(f"\nTotal flagged scans across all modalities: {total_flagged}")

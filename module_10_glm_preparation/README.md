@@ -9,7 +9,7 @@ By the end of this module, you will be able to:
 3. Explain how the haemodynamic response function (HRF) is convolved with a boxcar stimulus model to produce BOLD regressors
 4. Select and clean confound regressors from fMRIPrep output using minimal, moderate, and aggressive strategies
 5. Fit a `FirstLevelModel` to preprocessed BOLD data using nilearn
-6. Specify contrasts of interest (e.g., Reappraise vs Look_Neg) as linear combinations of design matrix columns
+6. Specify contrasts of interest (e.g., Reappraise vs Look or Look_Neg) as linear combinations of design matrix columns
 7. Compute z-statistic and t-statistic contrast maps from a fitted GLM
 8. Perform quality checks on the design matrix, including rank assessment, condition coverage, and variance inflation factors (VIF)
 
@@ -39,7 +39,7 @@ By the end of this module, you will be able to:
 
 The General Linear Model (GLM) is the cornerstone of task-based fMRI analysis. At the first level, a separate GLM is fit for each subject, regressing the preprocessed BOLD signal at every voxel onto a design matrix that encodes the timing of experimental conditions, low-frequency drift, and nuisance confounds. The resulting parameter estimates (β-maps) and their contrasts yield the statistical maps (z-maps, t-maps) that are carried forward to group-level analysis.
 
-This module walks through every step of first-level GLM preparation for an emotion regulation task: loading a preprocessed BOLD image, building a design matrix with HRF-convolved condition regressors, selecting confounds, fitting a `FirstLevelModel` with nilearn, and computing contrasts comparing regulatory strategies (Reappraise, Suppress) against a passive-viewing baseline (Look_Neg). You will also learn how to quality-check the design matrix before committing to a full analysis pipeline.
+This module walks through every step of first-level GLM preparation for an emotion regulation task: loading a preprocessed BOLD image, building a design matrix with HRF-convolved condition regressors, selecting confounds, fitting a `FirstLevelModel` with nilearn, and computing contrasts comparing regulatory strategies (Reappraise, Suppress) against a passive-viewing baseline (`Look` or `Look_Neg`, depending on your task labels). You will also learn how to quality-check the design matrix before committing to a full analysis pipeline.
 
 ## Module Contents
 
@@ -113,8 +113,8 @@ For this emotion-regulation task the primary contrasts of interest are:
 
 | Contrast Name | Weights |
 |---|---|
-| `Reappraise_vs_Look_Neg` | Reappraise − Look_Neg |
-| `Suppress_vs_Look_Neg` | Suppress − Look_Neg |
+| `Reappraise_vs_Look` | Reappraise − Look (or Look_Neg) |
+| `Suppress_vs_Look` | Suppress − Look (or Look_Neg) |
 | `Reappraise_vs_Suppress` | Reappraise − Suppress |
 
 ---
@@ -155,7 +155,7 @@ fMRIPrep BOLD image
          │
          ▼
 ┌────────────────────────┐
-│  Save z-maps (.nii.gz) │  → Group-level analysis (Module 11)
+│  Save z-maps (.nii.gz) │  → Input to your group-level analysis workflow
 └────────────────────────┘
 ```
 

@@ -134,7 +134,7 @@ bash scripts/run_heudiconv_single_subject.sh \
   sub-01 \
   /path/to/dicoms/sub-01 \
   /path/to/bids_output \
-  scripts/heuristic.py
+  ../data/heuristics/emotion_regulation_heuristic.py
 
 # 4. Validate output
 python scripts/check_heudiconv_output.py \
