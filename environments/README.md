@@ -131,7 +131,7 @@ docker compose run --rm fmriprep \
     --fs-license-file /opt/freesurfer/license.txt
 ```
 
-> **FreeSurfer licence** – place your `license.txt` at
+> **FreeSurfer license** – place your `license.txt` at
 > `data/freesurfer_license` before running fMRIPrep.
 
 ### Useful Docker commands
